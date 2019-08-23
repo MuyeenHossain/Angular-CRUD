@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-template-driven',
@@ -7,75 +10,48 @@ import { User } from '../user';
   styleUrls: ['./template-driven.component.css']
 })
 export class TemplateDrivenComponent implements OnInit {
-  
+
   userList: User[] = [];
-  
+
   name; email; contact;
   actionState;
   store;
   title = 'Add User';
 
-  constructor() { 
+  constructor(private router: Router) {
 
   }
 
   ngOnInit() {
+
     var data = JSON.parse(localStorage.getItem('userList'));
     if (data) {
       this.userList = data;
     }
-    
   }
 
-  addUser(form) {
+  editUser(user, index) {
     
-    //this.actionState = 'add';
-    if(this.title == 'Update') {
-      user = form.value;
-      this.userList.push(user);
-      localStorage.setItem('userList', JSON.stringify(this.userList));
-    }else{
-    console.log(form.value);
-    var user: User;
-    user = form.value;
-    this.userList.push(user);
-
-    localStorage.setItem('userList', JSON.stringify(this.userList));
-    }
-
-    console.log(this.userList);
+    localStorage.setItem('singleUserData', JSON.stringify(user));
+    localStorage.setItem('singleUserIndex', JSON.stringify(index));
+    
+    this.store = index;
+    console.log(user);
+    this.router.navigate(['edituser']);
   }
-
 
 
   deleteUser(index) {
     //alert(index);
     var result = confirm('Are you sure?');
-    for(let i = 0; i < this.userList.length; i++) {
-      if(index == i){
-        this.userList.splice(i,1);
+    for (let i = 0; i < this.userList.length; i++) {
+      if (index == i) {
+        this.userList.splice(i, 1);
         break;
       }
     }
     localStorage.setItem('userList', JSON.stringify(this.userList));
   }
 
-  editUser(user, index) {
-    this.title = 'Update';
-    this.name = user.name;
-    this.contact = user.contact;
-    this.email = user.email;
 
-    this.actionState = 'edit';
-    this.store = index;
-    console.log(user);
-  }
-
-  update() {
-    
-  }
-
-  
- 
-  
 }

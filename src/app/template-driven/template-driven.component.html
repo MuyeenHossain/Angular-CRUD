@@ -1,61 +1,5 @@
 
 
-<div class="container">
-    <div class="jumbotran">
-        <form #frm="ngForm" (ngSubmit)="addUser(frm)">
-            <div class="from-group">
-                <label for="name">
-                    Name:
-                </label>
-                <input
-                type="text"
-                class="from-control"
-                name="name"
-                [(ngModel)]="name"
-                required
-                pattern="[a-zA-Z][a-zA-Z ]+"
-                />
-            </div>
-            <!-- <div *ngIf="nameUser.touched" class="alert alert-danger">
-                <div *ngIf="nameUser.errors?.required">
-                    Name is required
-                </div>
-                <div *ngIf="nameUser.errors?.pattern">
-                    Invaild Name
-                </div>
-            </div> -->
-        
-            <div class="from-group">
-                <label for="contact">
-                    Contact:
-                </label>
-                <input
-                type="text"
-                class="from-control"
-                name="contact"
-                [(ngModel)]="contact"
-                required
-                />
-            </div>
-        
-            <div class="from-group">
-                <label for="email">
-                    Email:
-                </label>
-                <input
-                type="text"
-                class="from-control"
-                name="email"
-                [(ngModel)]="email"
-                required
-                />
-            </div>
-            <button type="submit" name="button" class="btn btn-success" [disabled]="frm.invalid">{{title}}</button>
-        </form>
-    </div>
-</div>
-
-
 <!---><ul class="list-group">
     <li *ngFor="let user of userList, let i=index" class="list-group-item">
             {{user?.name}}
@@ -65,12 +9,21 @@
 </ul>
 -->
 
-<table>
+<br>
+<br>
+<br>
+
+
+
+<a routerLink="/adduser">Add New User</a>
+
+<table class="table table-bordered">
     <thead>
             <tr>
                 <th>Name</th>
                 <th>Contact</th>
                 <th>Age</th>
+                <th>Action</th>
             </tr>
     </thead>
     <tbody>
@@ -78,11 +31,13 @@
             <td>{{user.name}}</td>
             <td>{{user.contact}}</td>
             <td>{{user.email}}</td>
-            <td><button class="edit" (click) = (editUser(user))>Edit</button></td>
-            <td><button class="deletebtn" (click) = "deleteUser(i)">Delete</button></td>
+            <td><button class="edit" (click) = "editUser(user, i)">Edit</button>
+                <button class="deletebtn" (click) = "deleteUser(i)">Delete</button>
+            </td>
+            <!-- <td><button class="deletebtn" (click) = "deleteUser(i)">Delete</button></td> -->
         </tr>
     </tbody>
 </table>
 
 
-{{frm.value | json}}
+<!-- {{frm.value | json}} -->

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'adduser',
     component: AddUserComponent
+  },
+  {
+    path: 'edituser',
+    component: EditUserComponent
   }
 ];
 
